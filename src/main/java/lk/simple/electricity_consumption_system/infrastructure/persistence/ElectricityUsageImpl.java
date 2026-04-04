@@ -4,6 +4,7 @@ import lk.simple.electricity_consumption_system.domain.model.ElectricityUsage;
 import lk.simple.electricity_consumption_system.domain.repository.ElectricityUsageRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -30,9 +31,18 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
                        entity.getCategory())).toList();
     }
 
+    //turn domain model to entity and save in db
     @Override
     public void saveUsage(ElectricityUsage electricityUsage){
-        //not implement yet
+       ElectricityUsageEntity entity = new ElectricityUsageEntity();
+       entity.setDate(electricityUsage.getDate());
+       entity.setUnitConsumed(electricityUsage.getUnitConsumed());
+       entity.setCategory(electricityUsage.getCategory());
+       entity.setDeleted(false);
+       entity.setCreatedAt(LocalDateTime.now());
+
+       //save in db
+       jpaElectricityUsageRepository.save(entity);
     }
 
 }
