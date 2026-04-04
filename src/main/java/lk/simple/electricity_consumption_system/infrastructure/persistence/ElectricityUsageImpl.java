@@ -2,20 +2,18 @@ package lk.simple.electricity_consumption_system.infrastructure.persistence;
 
 import lk.simple.electricity_consumption_system.domain.model.ElectricityUsage;
 import lk.simple.electricity_consumption_system.domain.repository.ElectricityUsageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class ElectricityUsageImpl implements ElectricityUsageRepository {
 
     //inject jpa repository as constructor
     private final JpaElectricityUsageRepository jpaElectricityUsageRepository;
-
-    public ElectricityUsageImpl(JpaElectricityUsageRepository jpaElectricityUsageRepository ){
-        this.jpaElectricityUsageRepository = jpaElectricityUsageRepository;
-    }
 
     //get all data from db, show to user
     @Override
