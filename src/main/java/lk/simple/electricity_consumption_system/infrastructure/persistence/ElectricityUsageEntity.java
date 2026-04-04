@@ -19,7 +19,7 @@ public class ElectricityUsageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
-    private int uniteConsumed;
+    private int unitConsumed;
     private String category;
     private boolean isDeleted;
     private LocalDateTime createdAt;
