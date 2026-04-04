@@ -21,8 +21,9 @@ public class ElectricityUsageUseCaseImpl implements ElectricityUsageUseCase{
         return electricityUsageRepository.getAllUsage();
     }
 
+    //get domain model from controller set to domain repo
     @Override
     public void saveUsage(ElectricityUsage electricityUsage){
-        //logic not implemented yet
+        electricityUsageRepository.saveUsage(electricityUsage);
     }
 }
