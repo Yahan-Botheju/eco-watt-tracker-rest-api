@@ -5,6 +5,14 @@ import lk.simple.electricity_consumption_system.domain.repository.ElectricityUsa
 
 import java.util.List;
 
-//public class ElectricityUsageImpl implements ElectricityUsageRepository {
-//
-//}
+public class ElectricityUsageImpl implements ElectricityUsageRepository {
+
+    //inject jpa repository as constructor
+    private final JpaElectricityUsageRepository jpaElectricityUsageRepository;
+
+    public ElectricityUsageImpl(JpaElectricityUsageRepository jpaElectricityUsageRepository ){
+        this.jpaElectricityUsageRepository = jpaElectricityUsageRepository;
+    }
+
+
+}
