@@ -7,7 +7,7 @@ import java.util.List;
 public interface ElectricityUsageRepository {
 
     //get all usage
-    List<ElectricityUsage> getAllUsage();
+    List<ElectricityUsage> getAllUsage(int page, int size);
 
     //save usage
     void saveUsage(ElectricityUsage electricityUsage);

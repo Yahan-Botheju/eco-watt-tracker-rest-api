@@ -25,9 +25,13 @@ public class ElectricityUsageController {
     private final ElectricityUsageMapper electricityUsageMapper;
 
     //get all usages
-    @GetMapping
-    public List<ElectricityUsageResponseDTO> getAllUsage(){
-         return electricityUsageUseCase.getAllUsage().stream().map(electricityUsageMapper::toResponseDTO).toList();
+    @GetMapping("/all")
+    public List<ElectricityUsageResponseDTO> getAllUsage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+
+    ){
+         return electricityUsageUseCase.getAllUsage(page, size).stream().map(electricityUsageMapper::toResponseDTO).toList();
     }
 
     //save new usage

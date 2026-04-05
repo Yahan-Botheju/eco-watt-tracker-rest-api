@@ -3,8 +3,11 @@ package lk.simple.electricity_consumption_system.infrastructure.persistence;
 import lk.simple.electricity_consumption_system.domain.model.ElectricityUsage;
 import lk.simple.electricity_consumption_system.domain.repository.ElectricityUsageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +20,11 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
 
     //get all data from db, show to user
     @Override
-    public List<ElectricityUsage> getAllUsage(){
+    public List<ElectricityUsage> getAllUsage(int page, int size){
 
-        List<ElectricityUsageEntity> electricityUsage = jpaElectricityUsageRepository.findAll();
+        Page<ElectricityUsageEntity> entityPage = jpaElectricityUsageRepository.findAll(PageRequest.of(page, size));
 
-       return electricityUsage.stream()
+       return entityPage.stream()
                .map(entity -> new ElectricityUsage(
                        entity.getId(),
                        entity.getDate(),
@@ -53,6 +56,7 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
         electricityUsageEntity.setUnitConsumed(electricityUsage.getUnitConsumed());
         electricityUsageEntity.setCategory(electricityUsage.getCategory());
         //electricityUsageEntity.setDeleted(false);
+        electricityUsageEntity.setUpdatedAt(LocalDateTime.now());
 
         //save in db
         jpaElectricityUsageRepository.save(electricityUsageEntity);

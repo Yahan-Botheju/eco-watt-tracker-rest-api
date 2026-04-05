@@ -14,9 +14,9 @@ public class ElectricityUsageUseCaseImpl implements ElectricityUsageUseCase{
 
     //get all data and return to domain repo
     @Override
-    public List<ElectricityUsage> getAllUsage(){
+    public List<ElectricityUsage> getAllUsage(int page, int size){
 
-        return electricityUsageRepository.getAllUsage();
+        return electricityUsageRepository.getAllUsage(page, size);
     }
 
     //get domain model from controller set to domain repo
