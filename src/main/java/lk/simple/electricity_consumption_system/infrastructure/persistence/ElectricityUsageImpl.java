@@ -59,4 +59,16 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
         //save in db
         jpaElectricityUsageRepository.save(electricityUsageEntity);
     }
+
+    //soft delete
+    @Override
+    public void deleteUsage(Long id){
+        //check related entity available in db using id
+        if (!jpaElectricityUsageRepository.existsById(id)){
+            throw new RuntimeException("ID not found");
+        }
+
+        //soft delete annotation exists in entity, isDeleted controlled by hibernate
+        jpaElectricityUsageRepository.deleteById(id);
+    }
 }

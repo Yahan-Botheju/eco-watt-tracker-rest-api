@@ -24,8 +24,6 @@ public class ElectricityUsageController {
     //inject mapper
     private final ElectricityUsageMapper electricityUsageMapper;
 
-    private final ElectricityUsage electricityUsage;
-
     //get all usages
     @GetMapping
     public List<ElectricityUsageResponseDTO> getAllUsage(){
@@ -54,5 +52,16 @@ public class ElectricityUsageController {
         electricityUsageUseCase.updateUsage(id, domainModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Details updated successful");
+    }
+
+    //delete usage
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUsage(
+            @PathVariable Long id
+    ){
+        //set id usecase interface
+        electricityUsageUseCase.deleteUsage(id);
+
+        return ResponseEntity.ok("Details delete successful");
     }
 }

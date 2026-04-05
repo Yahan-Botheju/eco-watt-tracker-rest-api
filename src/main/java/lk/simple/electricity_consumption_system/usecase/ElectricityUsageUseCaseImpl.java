@@ -33,4 +33,11 @@ public class ElectricityUsageUseCaseImpl implements ElectricityUsageUseCase{
         electricityUsageRepository.updateUsage(id, electricityUsage);
     }
 
+    //set id to domain repo
+    @Override
+    public void deleteUsage(Long id){
+
+        electricityUsageRepository.deleteUsage(id);
+    }
+
 }
