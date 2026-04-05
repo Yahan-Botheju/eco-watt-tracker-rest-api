@@ -53,4 +53,15 @@ public class ElectricityUsageController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Details updated successful");
     }
+
+    //delete usage
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUsage(
+            @PathVariable Long id
+    ){
+        //set id usecase interface
+        electricityUsageUseCase.deleteUsage(id);
+
+        return ResponseEntity.ok("Details delete successful");
+    }
 }
