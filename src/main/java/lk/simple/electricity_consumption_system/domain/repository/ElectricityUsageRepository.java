@@ -11,4 +11,7 @@ public interface ElectricityUsageRepository {
 
     //save usage
     void saveUsage(ElectricityUsage electricityUsage);
+
+    //update usage
+    void updateUsage(Long id, ElectricityUsage electricityUsage);
 }
