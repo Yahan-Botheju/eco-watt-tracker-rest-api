@@ -43,4 +43,20 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
        jpaElectricityUsageRepository.save(entity);
     }
 
+    //domain model data copy into entity and save in db
+    @Override
+    public void updateUsage(Long id, ElectricityUsage electricityUsage){
+        //check related details available in db using id
+        ElectricityUsageEntity electricityUsageEntity = jpaElectricityUsageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid ID"));
+
+        electricityUsageEntity.setDate(electricityUsage.getDate());
+        electricityUsageEntity.setUnitConsumed(electricityUsage.getUnitConsumed());
+        electricityUsageEntity.setCategory(electricityUsage.getCategory());
+        electricityUsageEntity.setDeleted(false);
+        electricityUsageEntity.setUpdatedAt(LocalDateTime.now());
+
+        //save in db
+        jpaElectricityUsageRepository.save(electricityUsageEntity);
+    }
 }
