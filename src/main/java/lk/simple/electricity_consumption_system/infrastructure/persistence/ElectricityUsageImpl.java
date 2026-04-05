@@ -5,7 +5,6 @@ import lk.simple.electricity_consumption_system.domain.repository.ElectricityUsa
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +37,6 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
        entity.setUnitConsumed(electricityUsage.getUnitConsumed());
        entity.setCategory(electricityUsage.getCategory());
        //entity.setDeleted(false);
-       entity.setCreatedAt(LocalDateTime.now());
 
        //save in db
        jpaElectricityUsageRepository.save(entity);
@@ -55,7 +53,6 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
         electricityUsageEntity.setUnitConsumed(electricityUsage.getUnitConsumed());
         electricityUsageEntity.setCategory(electricityUsage.getCategory());
         //electricityUsageEntity.setDeleted(false);
-        electricityUsageEntity.setUpdatedAt(LocalDateTime.now());
 
         //save in db
         jpaElectricityUsageRepository.save(electricityUsageEntity);
