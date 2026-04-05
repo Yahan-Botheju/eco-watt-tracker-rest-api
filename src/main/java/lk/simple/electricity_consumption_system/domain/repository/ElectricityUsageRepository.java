@@ -14,4 +14,7 @@ public interface ElectricityUsageRepository {
 
     //update usage
     void updateUsage(Long id, ElectricityUsage electricityUsage);
+
+    //delete usage
+    void deleteUsage(Long id);
 }
