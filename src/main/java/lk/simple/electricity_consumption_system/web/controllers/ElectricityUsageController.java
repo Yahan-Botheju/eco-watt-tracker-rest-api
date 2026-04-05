@@ -24,8 +24,6 @@ public class ElectricityUsageController {
     //inject mapper
     private final ElectricityUsageMapper electricityUsageMapper;
 
-    private final ElectricityUsage electricityUsage;
-
     //get all usages
     @GetMapping
     public List<ElectricityUsageResponseDTO> getAllUsage(){
