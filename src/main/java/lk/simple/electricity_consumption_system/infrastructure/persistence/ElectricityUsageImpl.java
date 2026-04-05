@@ -3,10 +3,13 @@ package lk.simple.electricity_consumption_system.infrastructure.persistence;
 import lk.simple.electricity_consumption_system.domain.model.ElectricityUsage;
 import lk.simple.electricity_consumption_system.domain.repository.ElectricityUsageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,11 +20,11 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
 
     //get all data from db, show to user
     @Override
-    public List<ElectricityUsage> getAllUsage(){
+    public List<ElectricityUsage> getAllUsage(int page, int size){
 
-        List<ElectricityUsageEntity> electricityUsage = jpaElectricityUsageRepository.findAll();
+        Page<ElectricityUsageEntity> entityPage = jpaElectricityUsageRepository.findAll(PageRequest.of(page, size));
 
-       return electricityUsage.stream()
+       return entityPage.stream()
                .map(entity -> new ElectricityUsage(
                        entity.getId(),
                        entity.getDate(),
@@ -36,8 +39,7 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
        entity.setDate(electricityUsage.getDate());
        entity.setUnitConsumed(electricityUsage.getUnitConsumed());
        entity.setCategory(electricityUsage.getCategory());
-       entity.setDeleted(false);
-       entity.setCreatedAt(LocalDateTime.now());
+       //entity.setDeleted(false);
 
        //save in db
        jpaElectricityUsageRepository.save(entity);
@@ -53,7 +55,7 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
         electricityUsageEntity.setDate(electricityUsage.getDate());
         electricityUsageEntity.setUnitConsumed(electricityUsage.getUnitConsumed());
         electricityUsageEntity.setCategory(electricityUsage.getCategory());
-        electricityUsageEntity.setDeleted(false);
+        //electricityUsageEntity.setDeleted(false);
         electricityUsageEntity.setUpdatedAt(LocalDateTime.now());
 
         //save in db
@@ -70,5 +72,17 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
 
         //soft delete annotation exists in entity, isDeleted controlled by hibernate
         jpaElectricityUsageRepository.deleteById(id);
+    }
+
+    @Override
+    public ElectricityUsage getHighestUsage(){
+        Optional<ElectricityUsageEntity> electricityUsage = jpaElectricityUsageRepository.findDayWithHighestUsage();
+
+        return electricityUsage.map(entity -> new ElectricityUsage(
+                entity.getId(),
+                entity.getDate(),
+                entity.getUnitConsumed(),
+                entity.getCategory()
+        )).orElseThrow(() -> new RuntimeException("Data not found"));
     }
 }

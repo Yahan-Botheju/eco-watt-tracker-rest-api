@@ -10,8 +10,8 @@ public interface JpaElectricityUsageRepository extends JpaRepository<Electricity
     //implement custom query for get the highest usage of day
     @Query(value =
             "select * from electricity_usage " +
-                    "where isDeleted = false " +
-                    "order by unitConsumed desc limit 1",nativeQuery = true)
+                    "where is_deleted = false " +
+                    "order by unit_consumed desc limit 1",nativeQuery = true)
 
     Optional<ElectricityUsageEntity> findDayWithHighestUsage();
 }

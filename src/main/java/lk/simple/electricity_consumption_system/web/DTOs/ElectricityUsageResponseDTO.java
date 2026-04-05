@@ -14,4 +14,7 @@ public class ElectricityUsageResponseDTO {
     private LocalDate date;
     private int unitConsumed;
     private String category;
+
+    //add new field for showing carbon wastage
+    private double carbonFootPrint;
 }

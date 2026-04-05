@@ -25,9 +25,13 @@ public class ElectricityUsageController {
     private final ElectricityUsageMapper electricityUsageMapper;
 
     //get all usages
-    @GetMapping
-    public List<ElectricityUsageResponseDTO> getAllUsage(){
-         return electricityUsageUseCase.getAllUsage().stream().map(electricityUsageMapper::toResponseDTO).toList();
+    @GetMapping("/all")
+    public List<ElectricityUsageResponseDTO> getAllUsage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+
+    ){
+         return electricityUsageUseCase.getAllUsage(page, size).stream().map(electricityUsageMapper::toResponseDTO).toList();
     }
 
     //save new usage
@@ -63,5 +67,25 @@ public class ElectricityUsageController {
         electricityUsageUseCase.deleteUsage(id);
 
         return ResponseEntity.ok("Details delete successful");
+    }
+
+    //get the highest usage of the day
+    @GetMapping("/highest-consumption")
+    public ResponseEntity<ElectricityUsageResponseDTO> getHighestUsage(){
+
+        // get the domain model
+        ElectricityUsage domainModel = electricityUsageUseCase.getHighestUsage();
+
+        //calculate carbon wastage using usecase method
+        double getCarbonFootPrint = electricityUsageUseCase.calculateCarbonFootPrint(domainModel.getUnitConsumed());
+
+        //turn domain model into response dto
+        ElectricityUsageResponseDTO responseDTO = electricityUsageMapper.toResponseDTO(domainModel);
+
+        //set carbon wastage into response
+        responseDTO.setCarbonFootPrint(getCarbonFootPrint);
+
+        //return the response
+        return  ResponseEntity.ok(responseDTO);
     }
 }

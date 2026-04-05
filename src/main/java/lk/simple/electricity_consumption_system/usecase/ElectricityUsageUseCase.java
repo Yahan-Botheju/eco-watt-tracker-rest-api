@@ -7,7 +7,7 @@ import java.util.List;
 public interface ElectricityUsageUseCase {
 
     //get all usage
-    List<ElectricityUsage> getAllUsage();
+    List<ElectricityUsage> getAllUsage(int page, int size);
 
     //save usage
     void saveUsage(ElectricityUsage electricityUsage);
@@ -17,4 +17,10 @@ public interface ElectricityUsageUseCase {
 
     //delete usage
     void deleteUsage(Long id);
+
+    //get the highest usage of the day
+    ElectricityUsage getHighestUsage();
+
+    //define public method for calculate carbon wastage
+    double calculateCarbonFootPrint(int unitConsumed);
 }
