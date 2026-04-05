@@ -24,6 +24,8 @@ public class ElectricityUsageController {
     //inject mapper
     private final ElectricityUsageMapper electricityUsageMapper;
 
+    private final ElectricityUsage electricityUsage;
+
     //get all usages
     @GetMapping
     public List<ElectricityUsageResponseDTO> getAllUsage(){
@@ -37,5 +39,20 @@ public class ElectricityUsageController {
             ){
         electricityUsageUseCase.saveUsage(electricityUsageMapper.toDomainModel(electricityUsageRequestDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body("Details saved successful");
+    }
+
+    //update usage
+    @PostMapping("/{id}")
+    public ResponseEntity<String> updateUsage(
+            @PathVariable Long id,
+            @RequestBody ElectricityUsageRequestDTO electricityUsageRequestDTO
+    ){
+        //set request dto to domain model
+        ElectricityUsage domainModel = electricityUsageMapper.toDomainModel(electricityUsageRequestDTO);
+
+        //send value to usecase interface
+        electricityUsageUseCase.updateUsage(id, domainModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Details updated successful");
     }
 }
