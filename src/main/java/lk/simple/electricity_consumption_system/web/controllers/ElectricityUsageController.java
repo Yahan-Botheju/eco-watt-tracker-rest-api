@@ -72,7 +72,16 @@ public class ElectricityUsageController {
         // get the domain model
         ElectricityUsage domainModel = electricityUsageUseCase.getHighestUsage();
 
-        //turn domain model into response and return as response
-        return  ResponseEntity.ok(electricityUsageMapper.toResponseDTO(domainModel));
+        //calculate carbon wastage using usecase method
+        double getCarbonFootPrint = electricityUsageUseCase.calculateCarbonFootPrint(domainModel.getUnitConsumed());
+
+        //turn domain model into response dto
+        ElectricityUsageResponseDTO responseDTO = electricityUsageMapper.toResponseDTO(domainModel);
+
+        //set carbon wastage into response
+        responseDTO.setCarbonFootPrint(getCarbonFootPrint);
+
+        //return the response
+        return  ResponseEntity.ok(responseDTO);
     }
 }

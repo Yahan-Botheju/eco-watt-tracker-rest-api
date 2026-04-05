@@ -46,4 +46,8 @@ public class ElectricityUsageUseCaseImpl implements ElectricityUsageUseCase{
         return  electricityUsageRepository.getHighestUsage();
     };
 
+    //create method that controller can access for calculate carbon wastage
+    public double calculateCarbonFootPrint(int unitConsumed){
+        return unitConsumed * 0.45;
+    }
 }

@@ -20,4 +20,7 @@ public interface ElectricityUsageUseCase {
 
     //get the highest usage of the day
     ElectricityUsage getHighestUsage();
+
+    //define public method for calculate carbon wastage
+    double calculateCarbonFootPrint(int unitConsumed);
 }
