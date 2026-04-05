@@ -64,4 +64,15 @@ public class ElectricityUsageController {
 
         return ResponseEntity.ok("Details delete successful");
     }
+
+    //get the highest usage of the day
+    @GetMapping("/highest-consumption")
+    public ResponseEntity<ElectricityUsageResponseDTO> getHighestUsage(){
+
+        // get the domain model
+        ElectricityUsage domainModel = electricityUsageUseCase.getHighestUsage();
+
+        //turn domain model into response and return as response
+        return  ResponseEntity.ok(electricityUsageMapper.toResponseDTO(domainModel));
+    }
 }

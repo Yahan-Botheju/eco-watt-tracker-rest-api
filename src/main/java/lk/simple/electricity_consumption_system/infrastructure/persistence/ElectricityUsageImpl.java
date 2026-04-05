@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
        entity.setDate(electricityUsage.getDate());
        entity.setUnitConsumed(electricityUsage.getUnitConsumed());
        entity.setCategory(electricityUsage.getCategory());
-       entity.setDeleted(false);
+       //entity.setDeleted(false);
        entity.setCreatedAt(LocalDateTime.now());
 
        //save in db
@@ -53,7 +54,7 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
         electricityUsageEntity.setDate(electricityUsage.getDate());
         electricityUsageEntity.setUnitConsumed(electricityUsage.getUnitConsumed());
         electricityUsageEntity.setCategory(electricityUsage.getCategory());
-        electricityUsageEntity.setDeleted(false);
+        //electricityUsageEntity.setDeleted(false);
         electricityUsageEntity.setUpdatedAt(LocalDateTime.now());
 
         //save in db
@@ -70,5 +71,17 @@ public class ElectricityUsageImpl implements ElectricityUsageRepository {
 
         //soft delete annotation exists in entity, isDeleted controlled by hibernate
         jpaElectricityUsageRepository.deleteById(id);
+    }
+
+    @Override
+    public ElectricityUsage getHighestUsage(){
+        Optional<ElectricityUsageEntity> electricityUsage = jpaElectricityUsageRepository.findDayWithHighestUsage();
+
+        return electricityUsage.map(entity -> new ElectricityUsage(
+                entity.getId(),
+                entity.getDate(),
+                entity.getUnitConsumed(),
+                entity.getCategory()
+        )).orElseThrow(() -> new RuntimeException("Data not found"));
     }
 }

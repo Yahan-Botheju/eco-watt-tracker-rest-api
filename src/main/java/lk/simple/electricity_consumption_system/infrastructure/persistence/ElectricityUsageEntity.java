@@ -25,7 +25,7 @@ public class ElectricityUsageEntity {
     private LocalDate date;
     private int unitConsumed;
     private String category;
-    private boolean isDeleted;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

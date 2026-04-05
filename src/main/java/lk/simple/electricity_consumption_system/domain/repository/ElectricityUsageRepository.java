@@ -19,5 +19,5 @@ public interface ElectricityUsageRepository {
     void deleteUsage(Long id);
 
     //get the highest usage of the day
-    void getHighestUsage();
+    ElectricityUsage getHighestUsage();
 }

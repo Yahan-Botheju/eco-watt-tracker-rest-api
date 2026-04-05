@@ -17,4 +17,7 @@ public interface ElectricityUsageUseCase {
 
     //delete usage
     void deleteUsage(Long id);
+
+    //get the highest usage of the day
+    ElectricityUsage getHighestUsage();
 }

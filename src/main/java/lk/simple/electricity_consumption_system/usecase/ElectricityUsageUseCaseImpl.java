@@ -40,4 +40,10 @@ public class ElectricityUsageUseCaseImpl implements ElectricityUsageUseCase{
         electricityUsageRepository.deleteUsage(id);
     }
 
+    //get the highest usage of the day
+    @Override
+    public ElectricityUsage getHighestUsage(){
+        return  electricityUsageRepository.getHighestUsage();
+    };
+
 }
