@@ -44,7 +44,7 @@ public class ElectricityUsageController {
     }
 
     //update usage
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateUsage(
             @PathVariable Long id,
             @RequestBody ElectricityUsageRequestDTO electricityUsageRequestDTO
