@@ -62,14 +62,14 @@ Layers:
 
 🚀 Features
 
-- ✅ CRUD operations for electricity usage
-- ✅ Pagination support for listing usage data
-- ✅ Soft delete using Hibernate
-- ✅ Auditing (createdAt, updatedAt)
-- ✅ Clean Architecture implementation
-- ✅ DTO-based request/response handling
-- ✅ MapStruct for object mapping
-- ✅ Derived field: Carbon Footprint Calculation
+-  CRUD operations for electricity usage
+-  Pagination support for listing usage data
+-  Soft delete using Hibernate
+-  Auditing (createdAt, updatedAt)
+-  Clean Architecture implementation
+-  DTO-based request/response handling
+-  MapStruct for object mapping
+-  Derived field: Carbon Footprint Calculation
 
 ---
 
