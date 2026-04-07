@@ -34,6 +34,7 @@ It manages electricity usage data and demonstrates proper layered design, DTO ma
 | Database    | PostgreSQL / H2             |
 | ORM         | Spring Data JPA             |
 | Mapping     | MapStruct                   |
+| Boilerplate | Boilerplate                 | | Build Tool  | Maven                       |
 | Boilerplate | Lombok                      |
 | API Docs    | Swagger (Springdoc OpenAPI) |
 
